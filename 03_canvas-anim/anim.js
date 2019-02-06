@@ -70,4 +70,6 @@ var go = document.getElementById("go");
 
 //assigning events to buttions
 stop.addEventListener("click", pause);
-go.addEventListener("click", play);
+go.addEventListener("click", function() { 
+	pause();
+	play(); });
