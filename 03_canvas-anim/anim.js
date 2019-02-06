@@ -1,5 +1,5 @@
 /*
-  RickAndTommy -- Karen Li, Thomas Lee
+  RickAndTommy -- Ricky Lin, Thomas Lee
   SoftDev2 pd6
   K03 -- They lock us in the tower whenever we get caught
   2019-02-06
