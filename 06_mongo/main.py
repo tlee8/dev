@@ -5,7 +5,7 @@
 
 
 import pymongo
-SERVER_ADDR = " "
+SERVER_ADDR = "104.248.114.55"
 connection = pymongo.MongoClient(SERVER_ADDR)
 db = connection.test
 collection = db.restaurants
@@ -26,20 +26,20 @@ def query_zipcode(zip):
 # All restaurants in a specified zip code and with a specified grade.
 def query_zipcode_grade(zip, grade):
     zip = str(zip)
-	restaurants =  collection.find({$and: [{"address.zipcode": zip },{"grades.0.grade": grade}]})
+	restaurants =  collection.find({'$and:' [{"address.zipcode": zip },{"grades.0.grade": grade}]})
 	for restaurant in restaurants:
 		print(restaurant)
 
 # All restaurants in a specified zip code with a score below a specified threshold.
 def query_threshold(zip, score):
     zip = str(zip)
-	restaurants = collection.find({$and: [{"address.zipcode": zip},{"grades.0.score":{ $lt: score }}]});
+	restaurants = collection.find({'$and:' [{"address.zipcode": zip},{"grades.0.score":{ '$lt': score }}]});
 	for restaurant in restaurants:
 		print(restaurant)
 
 # All restaurants in a specified zip code that is one of two specified cuisines
 def query_creative(zip, cuisA, cuisB):
     zip = str(zip)
-    restaurants = collection.find({$and: [{"address.zipcode": zip }, $or: [{"cuisine": cuisA}, {"cuisine": cuisB }]]})
+    restaurants = collection.find({'$and': [{"address.zipcode": zip }, '$or:' [{"cuisine": cuisA}, {"cuisine": cuisB }]]})
     for restaurant in restaurants:
 	print(restaurant)
