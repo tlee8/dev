@@ -13,7 +13,7 @@ If the db is already in the server, it is dropped to prevent duplicates. A new d
 
 import pymongo, json
 
-SERVER_ADDR="142.93.206.119"
+SERVER_ADDR="104.248.114.55"
 connection=pymongo.MongoClient(SERVER_ADDR)
 connection.drop_database("HeartGold")
 db = connection.HeartGold
