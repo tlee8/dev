@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 collection=None
 db=None
-ip = 157.230.50.34
+ip = "157.230.50.34"
 
 @app.route("/")
 def home():
@@ -29,18 +29,27 @@ def get_ip():
             db = connection["BoatBoatInspire"]
             collection = db["movies"]
             file = open('movies.json')
-            data = json.load(F)
+            data = json.load(file)
             collection.insert_many(data)
         except:
-            ip = 157.230.50.34
+            ip = "104.248.114.55"
             connection = pymongo.MongoClient(ip)
             connection.drop_database("database")
             db = connection["BoatBoatInspire"]
             collection = db["movies"]
             file = open('movies.json')
-            data = json.load(F)
+            data = json.load(file)
             collection.insert_many(data)
     return render_template("search.html",ip=ip)
+
+ip = "104.248.114.55"
+connection = pymongo.MongoClient(ip)
+connection.drop_database("database")
+db = connection["BoatBoatInspire"]
+collection = db["movies"]
+file = open('movies.json')
+data = json.load(file)
+collection.insert_many(data)
 
 def title_movie(title):
     return collection.find({'title':title})
@@ -55,10 +64,10 @@ def year_movie(year):
 def query():
     results=[]
     q = request.args.get("search")
-    results.append(title_movie(q))
+    #results.append(title_movie(q))
     results.append(genre_movie(q))
-    results.append(year_movie(q))
-    return render_template("results.html",results=results)
+    #results.append(year_movie(q))
+    return render_template("results.html",results=results[0])
 
 app.debug = True
 app.run()
